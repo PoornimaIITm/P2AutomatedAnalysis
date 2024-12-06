@@ -4,14 +4,12 @@ import seaborn as sns
 import openai
 import os
 import requests
+import sys
 
-# Set OpenAI API key and Proxy
-openai.api_key = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZHMxMDAwMDc1QGRzLnN0dWR5LmlpdG0uYWMuaW4ifQ.gE2pC5vPidH1Y4M8ZB7zY-YOPJJ-Jw_CNMUlD9C7974"  # Replace with your OpenAI API key
-
-#proxies = {
-#    "http": "http://aiproxy.sanand.workers.dev/openai",
-#    "https": "http://aiproxy.sanand.workers.dev/openai",
-#}
+# Retrieve the Bearer token from the environment variable
+openai.api_key = os.getenv("AIPROXY_TOKEN")
+if not openai.api_key:
+    raise ValueError("Environment variable AIPROXY_TOKEN is not set.")
 
 url = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 headers = {
@@ -109,14 +107,29 @@ def generate_readme(narrative, visualizations):
             readme_file.write(f"![{filename}]({filename})\n\n")
 
 # Main Function
-def main(file_path):
+def main():
+    # Parse command-line arguments
+    if len(sys.argv) != 2:
+        print("Usage: uv run autolysis.py <dataset.csv>")
+        sys.exit(1)
+
+    file_path = sys.argv[1]
+
+    # Validate the input file
+    if not os.path.isfile(file_path):
+        print(f"Error: File '{file_path}' not found.")
+        sys.exit(1)
+
+    print(f"Processing file: {file_path}...")
+
+    # Perform analysis
     data, summary = analyze_dataset(file_path)
     visualizations = visualize_data(data)
     narrative = narrate_with_llm(summary, visualizations)
     generate_readme(narrative, visualizations)
+
     print("Analysis complete. Results saved in README.md and associated .png files.")
 
-# Example Usage
-file_path = "/content/happiness.csv"  # Replace with your dataset file path
-main(file_path)
-
+# Entry Point
+if __name__ == "__main__":
+    main()
