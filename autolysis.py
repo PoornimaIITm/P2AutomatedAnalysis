@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import importlib
+import os
 
 # Ensure pip is installed and updated
 def ensure_pip():
