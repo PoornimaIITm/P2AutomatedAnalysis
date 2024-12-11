@@ -1,9 +1,20 @@
+import os
+import sys
+
+# Check and install dependencies
+required_packages = [
+    ("pandas", None),
+    ("seaborn", None),
+    ("matplotlib", None),
+    ("requests", None),
+    ("numpy", None)
+]
+for package, submodules in required_packages:
+    install_package(package, submodules)
+    
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import openai
-import os
-import sys
 import requests
 import numpy as np
 from dateutil.parser import parse
