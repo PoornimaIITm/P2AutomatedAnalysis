@@ -60,6 +60,16 @@ try:
 except ImportError:
     print("Failed to import 'openai' after installation. Please check the package and try again.")
 
+# Import the installed packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import openai
+import numpy as np
+
+# Example usage to confirm everything is working
+print("Packages imported successfully!")
+
 # Retrieve the Bearer token from the environment variable
 openai.api_key = os.getenv("AIPROXY_TOKEN")
 if not openai.api_key:
