@@ -2,6 +2,7 @@ import importlib
 import subprocess
 import sys
 import os
+import openai
 from dateutil.parser import parse
 
 def ensure_pip():
