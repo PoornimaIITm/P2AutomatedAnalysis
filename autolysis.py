@@ -1,20 +1,25 @@
-import os
-import sys
+import importlib
 import subprocess
+import sys
+from dateutil.parser import parse
+def install_and_import(package_name):
+    """
+    Function to check if a Python package is installed, and install it if not.
 
-# Function to install a Python package if not already installed
-def install_package(package_name, submodules=None):
-    """Installs a Python package if not already installed."""
+    Args:
+        package_name (str): The name of the package to check and install.
+    """
     try:
-        __import__(package_name)
-        if submodules:
-            for submodule in submodules:
-                __import__(f"{package_name}.{submodule}")
+        # Try to import the package
+        importlib.import_module(package_name)
+        print(f"'{package_name}' is already installed.")
     except ImportError:
-        print(f"Package {package_name} or submodule {submodules} not found. Installing...")
-        subprocess.check_call([sys.executable, "-m", "pip3", "install", package_name])
+        # If not installed, install the package
+        print(f"'{package_name}' not found. Installing...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+        print(f"'{package_name}' has been installed successfully.")
 
-# Check and install dependencies
+# List of required packages with optional versions
 required_packages = [
     ("pandas", None),
     ("seaborn", None),
@@ -22,15 +27,14 @@ required_packages = [
     ("requests", None),
     ("numpy", None)
 ]
-for package, submodules in required_packages:
-    install_package(package, submodules)
-    
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import requests
-import numpy as np
-from dateutil.parser import parse
+
+# Install each required package
+if __name__ == "__main__":
+    for package, version in required_packages:
+        if version:
+            install_and_import(f"{package}=={version}")
+        else:
+            install_and_import(package)
 
 # Retrieve the Bearer token from the environment variable
 openai.api_key = os.getenv("AIPROXY_TOKEN")
