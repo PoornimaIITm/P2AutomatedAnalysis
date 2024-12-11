@@ -2,7 +2,6 @@ import importlib
 import subprocess
 import sys
 import os
-import openai
 from dateutil.parser import parse
 
 def ensure_pip():
@@ -40,7 +39,8 @@ required_packages = [
     ("seaborn", None),
     ("matplotlib", None),
     ("requests", None),
-    ("numpy", None)
+    ("numpy", None),
+    ("openai", None)
 ]
 
 # Ensure pip is installed
@@ -53,6 +53,12 @@ if __name__ == "__main__":
             install_and_import(f"{package}=={version}")
         else:
             install_and_import(package)
+
+# Import openai after ensuring it's installed
+try:
+    import openai
+except ImportError:
+    print("Failed to import 'openai' after installation. Please check the package and try again.")
 
 # Retrieve the Bearer token from the environment variable
 openai.api_key = os.getenv("AIPROXY_TOKEN")
