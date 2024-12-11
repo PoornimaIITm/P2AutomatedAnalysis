@@ -2,6 +2,19 @@ import importlib
 import subprocess
 import sys
 from dateutil.parser import parse
+
+def ensure_pip():
+    """
+    Ensure pip is installed in the Python environment.
+    """
+    try:
+        import pip
+    except ImportError:
+        print("'pip' not found. Installing pip...")
+        subprocess.check_call([sys.executable, "-m", "ensurepip", "--upgrade"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
+        print("'pip' has been installed successfully.")
+
 def install_and_import(package_name):
     """
     Function to check if a Python package is installed, and install it if not.
@@ -27,6 +40,9 @@ required_packages = [
     ("requests", None),
     ("numpy", None)
 ]
+
+# Ensure pip is installed
+ensure_pip()
 
 # Install each required package
 if __name__ == "__main__":
