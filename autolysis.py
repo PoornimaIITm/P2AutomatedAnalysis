@@ -40,7 +40,8 @@ required_packages = [
     ("matplotlib", None),
     ("requests", None),
     ("numpy", None),
-    ("openai", None)
+    ("openai", None),
+    ("tabulate", None)
 ]
 
 # Ensure pip is installed
@@ -66,6 +67,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import openai
 import numpy as np
+from tabulate import tabulate
 
 # Example usage to confirm everything is working
 print("Packages imported successfully!")
