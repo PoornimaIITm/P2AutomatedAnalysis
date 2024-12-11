@@ -1,5 +1,18 @@
 import os
 import sys
+import subprocess
+
+# Function to install a Python package if not already installed
+def install_package(package_name, submodules=None):
+    """Installs a Python package if not already installed."""
+    try:
+        __import__(package_name)
+        if submodules:
+            for submodule in submodules:
+                __import__(f"{package_name}.{submodule}")
+    except ImportError:
+        print(f"Package {package_name} or submodule {submodules} not found. Installing...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
 
 # Check and install dependencies
 required_packages = [
