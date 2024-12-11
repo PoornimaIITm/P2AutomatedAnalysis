@@ -12,7 +12,7 @@ def install_package(package_name, submodules=None):
                 __import__(f"{package_name}.{submodule}")
     except ImportError:
         print(f"Package {package_name} or submodule {submodules} not found. Installing...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+        subprocess.check_call([sys.executable, "-m", "pip3", "install", package_name])
 
 # Check and install dependencies
 required_packages = [
