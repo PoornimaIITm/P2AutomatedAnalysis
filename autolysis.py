@@ -1,13 +1,9 @@
-import importlib
 import subprocess
 import sys
-import os
-from dateutil.parser import parse
+import importlib
 
+# Ensure pip is installed and updated
 def ensure_pip():
-    """
-    Ensure pip is installed in the Python environment.
-    """
     try:
         import pip
     except ImportError:
@@ -16,58 +12,39 @@ def ensure_pip():
         subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
         print("'pip' has been installed successfully.")
 
+# Function to check and install a package
 def install_and_import(package_name):
-    """
-    Function to check if a Python package is installed, and install it if not.
-
-    Args:
-        package_name (str): The name of the package to check and install.
-    """
     try:
-        # Try to import the package
         importlib.import_module(package_name)
         print(f"'{package_name}' is already installed.")
     except ImportError:
-        # If not installed, install the package
         print(f"'{package_name}' not found. Installing...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
         print(f"'{package_name}' has been installed successfully.")
 
-# List of required packages with optional versions
-required_packages = [
-    ("pandas", None),
-    ("seaborn", None),
-    ("matplotlib", None),
-    ("requests", None),
-    ("numpy", None),
-    ("openai", None),
-    ("tabulate", None)
-]
+# List of required packages with aliases
+packages_with_aliases = {
+    "pandas": "pd",
+    "matplotlib.pyplot": "plt",
+    "seaborn": "sns",
+    "openai": None,
+    "numpy": "np",
+    "tabulate": "tabulate"
+}
 
 # Ensure pip is installed
 ensure_pip()
 
-# Install each required package
-if __name__ == "__main__":
-    for package, version in required_packages:
-        if version:
-            install_and_import(f"{package}=={version}")
-        else:
-            install_and_import(package)
+# Check and install each package
+for package in packages_with_aliases.keys():
+    install_and_import(package)
 
-# Import openai after ensuring it's installed
-try:
-    import openai
-except ImportError:
-    print("Failed to import 'openai' after installation. Please check the package and try again.")
-
-# Import the installed packages
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import openai
-import numpy as np
-from tabulate import tabulate
+# Import the packages with aliases
+for package, alias in packages_with_aliases.items():
+    if alias:
+        globals()[alias] = importlib.import_module(package)
+    else:
+        globals()[package] = importlib.import_module(package)
 
 # Example usage to confirm everything is working
 print("Packages imported successfully!")
