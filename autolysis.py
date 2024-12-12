@@ -223,7 +223,6 @@ def narrate_with_llm(summary, visualizations):
         f"Integrate cutting-edge dynamic elements to extract deeper insights through correlations, statistical patterns, and visual anomaly detection. "
         f"Additionally, introduce image analysis or vision systems to enrich the dataset understanding through visual trends and patterns. "
         f"Employ dynamic prompt engineering to guide the LLM through a more nuanced, insightful exploration of the dataset.\n"
-        f"Provide variety of informative and aesthetically pleasing visuals through Matplotlib utilising its advanced features. Implement innovative visuals beyond standard methods using advanced AI strategies and vision capabilities."
         f"Ensure that Markdown formatting is utilized effectively, with logical sequencing of content that includes the structured data summary:\n"
         f"- Rows: {sanitized_summary['num_rows']}, Columns: {sanitized_summary['num_columns']}\n"
         f"- Missing Values: {sanitized_summary['missing_values']}\n"
