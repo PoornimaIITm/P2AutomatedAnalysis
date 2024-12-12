@@ -2,17 +2,21 @@ import subprocess
 import sys
 import importlib
 import os
-from dateutil.parser import parse
 
 # Ensure pip is installed and updated
 def ensure_pip():
     try:
         import pip
+        print("'pip' is already available.")
     except ImportError:
         print("'pip' not found. Installing pip...")
-        subprocess.check_call([sys.executable, "-m", "ensurepip", "--upgrade"])
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
-        print("'pip' has been installed successfully.")
+        try:
+            subprocess.check_call([sys.executable, "-m", "ensurepip", "--upgrade"])
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
+            print("'pip' has been installed successfully.")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to install pip: {e}")
+            sys.exit(1)
 
 # Function to check and install a package
 def install_and_import(package_name):
@@ -21,8 +25,12 @@ def install_and_import(package_name):
         print(f"'{package_name}' is already installed.")
     except ImportError:
         print(f"'{package_name}' not found. Installing...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
-        print(f"'{package_name}' has been installed successfully.")
+        try:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+            print(f"'{package_name}' has been installed successfully.")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to install '{package_name}': {e}")
+            sys.exit(1)
 
 # List of required packages with aliases
 packages_with_aliases = {
@@ -39,17 +47,22 @@ ensure_pip()
 
 # Check and install each package
 for package in packages_with_aliases.keys():
-    install_and_import(package)
+    install_and_import(package.split('.')[0])  # Handle submodules
 
 # Import the packages with aliases
 for package, alias in packages_with_aliases.items():
-    if alias:
-        globals()[alias] = importlib.import_module(package)
-    else:
-        globals()[package] = importlib.import_module(package)
+    try:
+        module = importlib.import_module(package)
+        if alias:
+            globals()[alias] = module
+        else:
+            globals()[package] = module
+    except ModuleNotFoundError as e:
+        print(f"Error importing '{package}': {e}")
+        sys.exit(1)
 
 # Example usage to confirm everything is working
-print("Packages imported successfully!")
+print("All packages have been successfully installed and imported!")
 
 # Retrieve the Bearer token from the environment variable
 openai.api_key = os.getenv("AIPROXY_TOKEN")
