@@ -218,6 +218,7 @@ def narrate_with_llm(summary, visualizations):
     prompt = (
         f"Analyze the following dataset summary and craft a nuanced, sophisticated, structured and refined narrative with advanced storytelling capability and exploratory techniques integrating vision capabilities, providing deeper insights that reflects both analytical depth, statistical methods, coherence, creativity and adaptability to diverse datasets, ensuring the code guides the LLM with context-rich prompts. "
         f"Utilize agentic and vision-based approaches to highlight significant patterns, trends, and implications. "
+        f"Address any errors or misalignments to enhance clarity and provide a seamless analysis. "
         f"Focus on clear, concise prompts that guide the narrative through proper data description, analysis, insights, and implications. "
         f"Integrate cutting-edge dynamic elements to extract deeper insights through correlations, statistical patterns, and visual anomaly detection. "
         f"Additionally, introduce image analysis or vision systems to enrich the dataset understanding through visual trends and patterns. "
