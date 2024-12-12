@@ -218,6 +218,8 @@ def narrate_with_llm(summary, visualizations):
     prompt = (
         f"Analyze the following dataset summary and craft a nuanced, sophisticated, structured and refined narrative with advanced storytelling capability and exploratory techniques integrating vision capabilities, providing deeper insights that reflects both analytical depth, statistical methods, coherence creativity and adaptability to diverse datasets. "
         f"Utilize agentic and vision-based approaches to highlight significant patterns, trends, and implications. "
+        f"Integrate cutting-edge dynamic elements to extract deeper insights through correlations, statistical patterns, and visual anomaly detection. "
+        f"Additionally, introduce image analysis or vision systems to enrich the dataset understanding through visual trends and patterns. "
         f"Provide variety of informative and aesthetically pleasing visuals through Matplotlib utilising its advanced features. Implement innovative visuals beyond standard methods using advanced AI strategies and vision capabilities."
         f"Here is the structured data summary:\n"
         f"- Rows: {sanitized_summary['num_rows']}, Columns: {sanitized_summary['num_columns']}\n"
