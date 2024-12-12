@@ -226,7 +226,7 @@ def narrate_with_llm(summary, visualizations):
         f"- Key Statistical Insights: {sanitized_summary['desc_stats_summary']}\n"
         f"- Correlation Summary: {sanitized_summary['corr_matrix_summary']}\n\n"
         f"**Advanced Instructions:**\n"
-        f"1. Provide a comprehensive overview of the dataset, emphasizing any inherent complexity or unique characteristics.\n"
+        f"1. Provide a comprehensive sophisticated overview of the dataset, emphasizing any inherent complexity or unique characteristics.\n"
         f"2. Analyze statistical and correlation insights to uncover hidden relationships, trends, and potential anomalies.\n"
         f"3. Discuss patterns or outliers as they pertain to agentic and vision-based insights, considering their potential real-world implications.\n"
         f"4. Identify areas for further exploration and propose data-driven next steps that leverage this analysis.\n"
