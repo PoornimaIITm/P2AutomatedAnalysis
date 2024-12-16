@@ -216,9 +216,10 @@ def narrate_with_llm(summary, visualizations):
 
  # Prepare concise data summaries for the LLM
     prompt = (
-        f"Analyze the following dataset summary and generate a nuanced, structured, and dynamic narrative. Combine advanced storytelling techniques with deeper analytical methods, "
-        f"comprehensive statistical exploration, and actionable insights. Integrate vision-based systems and dynamic features to ensure a scalable, robust, and adaptive approach.\n\n"
-        
+        f"Analyze the following dataset summary and generate a cohesive, dynamic, and insight-driven narrative. "
+        f"Combine advanced analytical techniques with actionable insights and storytelling, ensuring that findings are explained clearly, their implications are contextualized, "
+        f"and they are tied to meaningful recommendations. Adapt the narrative to guide stakeholders through the analysis, linking patterns to real-world applications.\n\n"
+
         f"**Dataset Overview:**\n"
         f"- Rows: {sanitized_summary['num_rows']}\n"
         f"- Columns: {sanitized_summary['num_columns']}\n"
@@ -227,21 +228,28 @@ def narrate_with_llm(summary, visualizations):
         f"- Key Statistical Insights: {sanitized_summary['desc_stats_summary']}\n"
         f"- Correlation Summary: {sanitized_summary['corr_matrix_summary']}\n\n"
     
-        f"**Analysis and Exploration Instructions:**\n"
-        f"1. **Descriptive Statistics and Processing**:\n"
-        f"   - Provide a detailed statistical summary (mean, median, standard deviation, percentiles) for numeric columns.\n"
-        f"   - Identify and handle missing values with advanced imputation or flagging methods.\n"
-        f"   - Summarize column-wise distributions, highlighting skewness and kurtosis for key variables.\n\n"
-        
+        f"**Hybrid Narrative Instructions:**\n"
+        f"1. **Structured Analytical Explanation**:\n"
+        f"   - Begin with an overview of the dataset, highlighting its scope, key characteristics, and notable features.\n"
+        f"   - Use descriptive statistics to summarize numeric columns (mean, median, standard deviation) and highlight interesting patterns (e.g., outliers, skewed distributions).\n"
+        f"   - Avoid generating visuals for date or ID columns (e.g., `book_id`, `user_id`) and focus instead on significant numeric or categorical fields.\n"
+        f"   - Dynamically detect and exclude ID/date columns from visualization and correlation analysis.\n\n"
+    
         f"2. **Deeper Analytical Observations**:\n"
         f"   - Perform clustering or dimensionality reduction techniques (e.g., PCA) to identify latent patterns.\n"
         f"   - Conduct advanced correlation analysis to detect nonlinear relationships (e.g., Spearman, Kendall).\n"
         f"   - Highlight significant trends, anomalies, or outliers, linking them to possible real-world implications.\n\n"
-    
+        f"   - Suggest next steps for further exploration based on patterns, outliers, or gaps identified in the dataset.\n\n"
+        f"   - Tie the findings into a cohesive narrative that explains how different variables interact, focusing on relationships with significant correlations or trends.\n"
+        f"   - Use examples or scenarios to ground abstract insights in practical or real-world contexts.\n"
+        f"   - Discuss anomalies or unexpected results and propose hypotheses or scenarios that could explain them.\n\n"
+
         f"3. **Dynamic and Vision-Based Features**:\n"
+        f"   - Dynamically generate graphs (e.g., scatterplots, bar charts, heatmaps) for significant numeric or categorical fields.\n"
+        f"   - Ensure visualizations directly support the narrative and focus on key findings or relationships.\n"
+        f"   - Avoid redundant or irrelevant visuals, especially for ID-like or date fields.\n\n"
         f"   - Apply visual analysis techniques (e.g., image clustering, feature extraction) to detect trends or anomalies if the dataset includes visual elements.\n"
-        f"   - Dynamically generate interactive graphs (e.g., heatmaps, scatterplots, pair plots) to enhance the understanding of complex relationships.\n\n"
-    
+        
         f"4. **Integrated Narrative Generation**:\n"
         f"   - Synthesize insights from statistical and deeper analytical methods into a cohesive narrative.\n"
         f"   - Provide actionable recommendations and potential next steps based on the findings.\n"
@@ -250,6 +258,7 @@ def narrate_with_llm(summary, visualizations):
         f"5. **Scalability and Efficiency Optimization**:\n"
         f"   - Implement optimized techniques for handling large datasets (e.g., batch processing, lazy loading).\n"
         f"   - Reduce memory usage by leveraging reusable logic and efficient library calls.\n"
+        f"   - Minimize redundant calculations by leveraging reusable logic for missing data handling, statistical summaries, and correlation analysis.\n\n"
         f"   - Highlight opportunities for runtime optimization in the provided code.\n\n"
     
         f"6. **Vision and Agentic Capabilities**:\n"
