@@ -216,9 +216,8 @@ def narrate_with_llm(summary, visualizations):
 
  # Prepare concise data summaries for the LLM
     prompt = (
-        f"Analyze the following dataset summary and craft a nuanced, sophisticated, structured, and refined narrative with advanced storytelling capability and exploratory techniques. "
-        f"Integrate vision-based insights, providing deeper understanding through image analysis and trends, and use dynamic adaptability to enhance analysis depth and relevance. "
-        f"Address any errors or misalignments to enhance clarity and provide a seamless, data-driven narrative.\n\n"
+        f"Analyze the following dataset summary and generate a nuanced, structured, and dynamic narrative. Combine advanced storytelling techniques with deeper analytical methods, "
+        f"comprehensive statistical exploration, and actionable insights. Integrate vision-based systems and dynamic features to ensure a scalable, robust, and adaptive approach.\n\n"
         
         f"**Dataset Overview:**\n"
         f"- Rows: {sanitized_summary['num_rows']}\n"
@@ -228,38 +227,48 @@ def narrate_with_llm(summary, visualizations):
         f"- Key Statistical Insights: {sanitized_summary['desc_stats_summary']}\n"
         f"- Correlation Summary: {sanitized_summary['corr_matrix_summary']}\n\n"
     
-        f"**Comprehensive Instructions:**\n"
-        f"1. **Sophisticated Overview**: Provide a structured, narrative-driven introduction to the dataset, highlighting its complexity and key areas of interest.\n"
-        f"2. **In-Depth Analysis**: Use descriptive statistics and correlation summaries to uncover hidden patterns, relationships, outliers, and trends. Highlight key implications.\n"
-        f"3. **Vision-Based Integration**: Apply advanced vision techniques (if applicable) to detect visual anomalies, trends, or clusters, and incorporate these insights into the narrative.\n"
-        f"4. **Seamless Visualization Integration**: Recommend relevant visual aids (e.g., heatmaps, scatterplots, trend lines) that enhance understanding. Fully integrate them with the narrative.\n"
-        f"5. **Iterative Refinement**: Refine insights through dynamic, iterative steps, ensuring deeper exploration of patterns, correlations, and potential anomalies.\n"
-        f"6. **Scalability and Efficiency**:\n"
-        f"   - Optimize for large datasets by reducing redundancy.\n"
-        f"   - Address missing data with imputation techniques or flagging mechanisms.\n"
-        f"   - Tailor outputs for diverse dataset types (structured, semi-structured, visual).\n"
-        f"7. **Dynamic Output Generation**: Use advanced prompt engineering to adapt to varied dataset structures, ensuring robust, scalable insights for datasets of any size.\n\n"
+        f"**Analysis and Exploration Instructions:**\n"
+        f"1. **Descriptive Statistics and Processing**:\n"
+        f"   - Provide a detailed statistical summary (mean, median, standard deviation, percentiles) for numeric columns.\n"
+        f"   - Identify and handle missing values with advanced imputation or flagging methods.\n"
+        f"   - Summarize column-wise distributions, highlighting skewness and kurtosis for key variables.\n\n"
+        
+        f"2. **Deeper Analytical Observations**:\n"
+        f"   - Perform clustering or dimensionality reduction techniques (e.g., PCA) to identify latent patterns.\n"
+        f"   - Conduct advanced correlation analysis to detect nonlinear relationships (e.g., Spearman, Kendall).\n"
+        f"   - Highlight significant trends, anomalies, or outliers, linking them to possible real-world implications.\n\n"
     
-        f"**Formatting and Narrative Guidelines:**\n"
-        f"- Use Markdown with clear subheadings (e.g., 'Overview,' 'Statistical Insights,' 'Vision-Based Analysis,' 'Recommendations').\n"
-        f"- Minimize redundancy while retaining a comprehensive exploration.\n"
-        f"- Include concise bullet points for emphasis and logical structure.\n\n"
+        f"3. **Dynamic and Vision-Based Features**:\n"
+        f"   - Apply visual analysis techniques (e.g., image clustering, feature extraction) to detect trends or anomalies if the dataset includes visual elements.\n"
+        f"   - Dynamically generate interactive graphs (e.g., heatmaps, scatterplots, pair plots) to enhance the understanding of complex relationships.\n\n"
     
-        f"**Advanced Functional Enhancements:**\n"
-        f"1. **Vision-Based Functionality**:\n"
-        f"   - Detect visual trends, anomalies, and clusters using advanced vision-based approaches.\n"
-        f"   - Provide actionable insights linked to visual data exploration.\n"
-        f"2. **Dynamic Iterative Outputs**:\n"
-        f"   - Suggest dynamic re-prompts to explore specific areas (e.g., trends, correlations, outliers).\n"
-        f"   - Tailor insights based on dataset characteristics or user-defined priorities.\n"
-        f"3. **Scalability and Efficiency**:\n"
-        f"   - Optimize code for memory and computation efficiency to handle large-scale datasets.\n"
-        f"   - Address missing values effectively, preserving data integrity while maintaining depth.\n\n"
+        f"4. **Integrated Narrative Generation**:\n"
+        f"   - Synthesize insights from statistical and deeper analytical methods into a cohesive narrative.\n"
+        f"   - Provide actionable recommendations and potential next steps based on the findings.\n"
+        f"   - Ensure the narrative dynamically adapts to patterns or anomalies identified during analysis.\n\n"
     
-        f"Ensure the narrative provides a comprehensive, adaptable, and insightful analysis that incorporates vision-based trends, statistical patterns, and dynamic refinement. "
-        f"Focus on clear, actionable insights and recommendations while optimizing outputs for scalability and efficiency."
+        f"5. **Scalability and Efficiency Optimization**:\n"
+        f"   - Implement optimized techniques for handling large datasets (e.g., batch processing, lazy loading).\n"
+        f"   - Reduce memory usage by leveraging reusable logic and efficient library calls.\n"
+        f"   - Highlight opportunities for runtime optimization in the provided code.\n\n"
+    
+        f"6. **Vision and Agentic Capabilities**:\n"
+        f"   - Integrate advanced vision systems for tasks like anomaly detection, object recognition, or trend prediction in visual datasets.\n"
+        f"   - Highlight any agentic tasks that can be automated or require decision-making processes linked to the dataset insights.\n\n"
+    
+        f"**Formatting and Output Guidelines:**\n"
+        f"- Use Markdown formatting with clear subheadings (e.g., 'Descriptive Statistics,' 'Advanced Analysis,' 'Vision-Based Insights').\n"
+        f"- Include graphs and tables where applicable, ensuring they directly support the narrative.\n"
+        f"- Summarize key findings in bullet points, linking them to actionable recommendations.\n"
+        f"- Provide reproducible, modular code snippets for key operations like missing data handling, clustering, and visualization.\n\n"
+    
+        f"**Key Enhancements:**\n"
+        f"1. Combine deeper analytical methods with descriptive statistics to uncover latent patterns and relationships.\n"
+        f"2. Optimize runtime performance for large datasets using advanced processing techniques.\n"
+        f"3. Dynamically integrate vision-based capabilities and advanced statistical insights into the analysis.\n"
+        f"4. Generate a cohesive narrative that is actionable, adaptable, and rich in detail, ensuring seamless integration with code outputs.\n"
     )
-    
+
     data = {
     "model":"gpt-4o-mini",
     "messages":[
